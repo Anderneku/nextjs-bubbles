@@ -9,6 +9,8 @@ import {
   Send,
   Trash2,
   Home,
+  Search,
+  
 } from "lucide-react";
 
 import { NavUser } from "@/components/nav-user";
@@ -24,6 +26,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
 import { Switch } from "@/components/ui/switch";
@@ -43,9 +46,9 @@ const data = {
       isActive: true,
     },
     {
-      title: "Drafts",
+      title: "Discover",
       url: "#",
-      icon: File,
+      icon: Search,
       isActive: false,
     },
     {
