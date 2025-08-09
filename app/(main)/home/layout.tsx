@@ -14,13 +14,14 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
-import { Home, Search, Settings } from "lucide-react";
+import { Home, Search, Settings, User } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const navItems = [
   { label: "Home", icon: Home, href: "/" },
   { label: "Search", icon: Search, href: "/search" },
   { label: "Settings", icon: Settings, href: "/settings" },
+  { label: "Profile", icon: User, href: "/settings" },
 ];
 
 
@@ -53,25 +54,10 @@ export default function RootLayout({
         }
       >
         <AppSidebar />
+
+    
         <SidebarInset>
-          <header className="bg-background sticky top-0 flex shrink-0 items-center gap-2 border-b p-4">
-            <SidebarTrigger  className="-ml-1" />
-            <Separator
-              orientation="vertical"
-              className="mr-2 data-[orientation=vertical]:h-4"
-            />
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">All Inboxes</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Inbox</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-          </header>
+
           {children}
         </SidebarInset>
       </SidebarProvider>
@@ -96,9 +82,6 @@ export default function RootLayout({
           </div>
 
       )}
-
-      {/* Main content wrapper (with left padding for sidebar on desktop) */}
-
     </div>
   )
 }
