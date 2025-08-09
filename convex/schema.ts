@@ -8,7 +8,6 @@ export default defineSchema({
     name: v.string(),
     email: v.string(),
     avatarUrl: v.optional(v.string()),
-    createdAt: v.number(),
   }).index("by_clerkId", ["clerkId"]),
 
   // Bubbles

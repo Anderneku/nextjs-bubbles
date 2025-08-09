@@ -41,6 +41,7 @@ export default function RootLayout({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   return (
+    
     <div>
 
       {!isMobile && 

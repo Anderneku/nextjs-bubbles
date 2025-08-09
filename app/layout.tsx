@@ -1,7 +1,7 @@
 
 import "./globals.css";
-import { ConvexClientProvider } from "../lib/ConvexClientProvider";
-
+import  ConvexClientProvider  from "../lib/ConvexClientProvider";
+import { ClerkProvider } from '@clerk/nextjs'
 
 export default function RootLayout({
   children,
@@ -9,6 +9,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
     <html lang="en">
       <ConvexClientProvider>
         <body
@@ -18,5 +19,6 @@ export default function RootLayout({
         </body>
       </ConvexClientProvider>
     </html>
+      </ClerkProvider>
   );
 }

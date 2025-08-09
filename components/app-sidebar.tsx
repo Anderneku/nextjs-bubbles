@@ -91,7 +91,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         collapsible="icon"
         className="w-[calc(var(--sidebar-width-icon)+1px)]! border-r "
       >
-        <SidebarHeader>
+        <SidebarHeader className="w-full flex items-center justify-center">
+          {/*   TODO: Add Logo */}
+          <File/>
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton size="lg" asChild className="md:h-8 md:p-0">
