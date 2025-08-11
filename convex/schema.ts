@@ -20,6 +20,7 @@ export default defineSchema({
     joinCode: v.optional(v.string()), // invite-only code
     requireApproval: v.boolean(),     // if true, code is not enough
     createdAt: v.number(),
+    iconUrl: v.optional(v.string()), // URL to bubble icon
   }),
 
   // Bubble Members

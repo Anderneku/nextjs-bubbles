@@ -34,6 +34,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "./ui/separator";
+import { useRouter } from "next/navigation";
 
 // This is sample data
 const data = {
@@ -72,7 +73,7 @@ const data = {
     
     {
       title: "New Bubble",
-      url: "#",
+      url: "/create-bubble",
       icon: Plus,
       isActive: false,
     },
@@ -82,8 +83,13 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   // Note: I'm using state to show active item.
   // IRL you should use the url/router.
+  const router = useRouter();
   const [activeItem, setActiveItem] = React.useState(data.navMain[0]);
   const { setOpen } = useSidebar();
+
+  function goToCreateBubble() {
+    router.push("/create-bubble");
+  }
 
   return (
     <>
@@ -149,6 +155,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                       onClick={() => {
                         setActiveItem(item);
                         setOpen(true);
+                        goToCreateBubble();
                       }}
                       isActive={activeItem?.title === item.title}
                       className="px-2.5 md:px-2 bg-primary text-primary-foreground hover:h-16 hover:bg-primary hover:text-primary-foreground"
