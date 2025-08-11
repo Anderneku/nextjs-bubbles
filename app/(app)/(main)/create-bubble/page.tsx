@@ -1,3 +1,4 @@
+import { CreateBubbleForm } from "@/components/forms/createBubble";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function CreateBubble() {
@@ -9,9 +10,7 @@ export default function CreateBubble() {
             <CardDescription>Blow a New Bubble to Start Your New Community</CardDescription>
             </CardHeader>
             <CardContent>
-            <form>
-
-            </form>
+            <CreateBubbleForm/>
 
             </CardContent>
         </Card>
