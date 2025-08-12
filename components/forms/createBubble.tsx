@@ -71,12 +71,57 @@ export function CreateBubbleForm() {
       availability: "public",
     },
   });
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-  }
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const timestamp = Math.round(new Date().getTime() / 1000);
+      const paramsToSign = {
+        timestamp: timestamp,
+        folder: "bubble_icons",
+      };
 
+      // Get signature from the API
+      const signatureResponse = await fetch("/api/sign-cloudinary-params", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ paramsToSign }),
+      });
+      const { signature } = await signatureResponse.json();
+      const formData = new FormData();
+      formData.append("file", values.icon);
+      formData.append("timestamp", timestamp.toString());
+      formData.append("signature", signature);
+      formData.append("folder", "bubble_icons");
+      formData.append("quality", "60");
+      formData.append("fetch_format", "auto");
+      formData.append(
+        "api_key",
+        process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY as string
+      );
+
+      // Upload to Cloudinary
+      const uploadResponse = await fetch(
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+      const result = await uploadResponse.json();
+      //   if (uploadResponse.ok) {
+      //     return {
+      //       url: result.secure_url,
+      //       publicId: result.public_id,
+      //     };
+      //   } else {
+      //     throw new Error(result.error?.message || "Upload failed");
+      //   }
+    } catch (error) {
+      console.error("Upload error:", error);
+      throw error;
+    }
+  }
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
