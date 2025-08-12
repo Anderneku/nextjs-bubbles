@@ -63,8 +63,8 @@ const data = {
       isActive: false,
     },
     {
-      title: "Bubbles",
-      url: "#",
+      title: "Your Bubbles",
+      url: "/bubbles",
       icon: Bubbles,
       isActive: false,
     },
@@ -86,6 +86,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const router = useRouter();
   const [activeItem, setActiveItem] = React.useState(data.navMain[0]);
   const { setOpen } = useSidebar();
+
+  function goToPage(link :string){
+    router.push(link);
+  }
 
   function goToCreateBubble() {
     router.push("/create-bubble");
@@ -130,6 +134,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                       onClick={() => {
                         setActiveItem(item);
                         setOpen(true);
+                        goToPage(item.url)
                       }}
                       isActive={activeItem?.title === item.title}
                       className="px-2.5 md:px-2"

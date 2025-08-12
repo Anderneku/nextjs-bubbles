@@ -1,9 +1,10 @@
 import { v } from "convex/values";
-import { mutation } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
+import { Id } from "./_generated/dataModel";
 
 export const createBubble = mutation({
   args: {
-    publicId: v.string(),
+    iconUrl: v.string(),
     userId: v.string(),
     name: v.string(),
     description: v.string(),
@@ -34,14 +35,46 @@ export const createBubble = mutation({
       counter++;
       slug = `${baseSlug}-${counter}`;
     }
-    ctx.db.insert("bubbles", {
+    const bubbleId = await ctx.db.insert("bubbles", {
       createdBy: args.userId,
       name: args.name,
       description: args.description,
-      iconId: args.publicId,
+      iconUrl: args.iconUrl,
       isPublic: args.isPublic,
       requireApproval: false,
       slug: slug,
     });
+    ctx.db.insert("bubble_members", {
+      user_id: args.userId,
+      bubbleId: bubbleId,
+      role: "admin",
+    });
   },
 });
+
+export const getBubbles = query({
+  args: {
+    userId: v.string()
+  },
+  handler: async (ctx, args) => {
+    const userBubbles = [];
+    const bubbleMemberships = await ctx.db.query("bubble_members").withIndex("by_userId_role", q => q.eq("user_id", args.userId)).collect();
+    for (const bubbleMembership of bubbleMemberships){
+      const bubble = await ctx.db.get(bubbleMembership.bubbleId as Id<"bubbles">);
+      userBubbles.push({
+        bubble: bubble,
+        role: bubbleMembership.role
+      })
+    }
+    return userBubbles;
+  }
+})
+
+export const getBubbleName = query({
+  args: {
+    bubbleSlug: v.string()
+  },
+  handler: async (ctx, args) => {
+    return await ctx.db.query("bubbles").withIndex("slug", q => q.eq("slug", args.bubbleSlug)).unique();
+  }
+})

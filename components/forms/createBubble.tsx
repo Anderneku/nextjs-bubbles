@@ -121,7 +121,7 @@ export function CreateBubbleForm() {
           name: values.name,
           description: values.description,
           isPublic: values.availability == "public" ? true : false,
-          publicId: result.public_id,
+          iconUrl: result.secure_url,
           userId: user?.id,
         });
       }

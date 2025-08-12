@@ -19,7 +19,7 @@ export default defineSchema({
     isPublic: v.boolean(),        // for discoverability
     joinCode: v.optional(v.string()), // invite-only code
     requireApproval: v.boolean(),     // if true, code is not enough
-    iconId: v.string(), // ID of the icon file in storage
+    iconUrl: v.string(),
   }).index("slug", ["slug"]),
 
   // Bubble Members
@@ -27,15 +27,13 @@ export default defineSchema({
     user_id: v.string(),
     bubbleId: v.string(),
     role: v.union(v.literal("admin"), v.literal("moderator"), v.literal("member")),
-    joinedAt: v.number(),
-  }),
+  }).index("by_userId_role", ["user_id", "role"]),
 
   // Posts
   posts: defineTable({
     authorId: v.string(),
     bubbleId: v.string(),
     body: v.string(),
-    createdAt: v.string(),
   }),
 
   // Comments
