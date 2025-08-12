@@ -21,6 +21,7 @@ export default defineSchema({
     requireApproval: v.boolean(),     // if true, code is not enough
     createdAt: v.number(),
     iconUrl: v.optional(v.string()), // URL to bubble icon
+    iconId: v.string(), // ID of the icon file in storage
   }),
 
   // Bubble Members

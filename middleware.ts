@@ -1,7 +1,7 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-const isProtectedRoute = createRouteMatcher(["/app(.*)"]);
+const isProtectedRoute = createRouteMatcher(["/home", "/create-bubble", "/bubbles/(.*)"]);
 const isPublicRoute = createRouteMatcher([
   "/",
   "/login", 

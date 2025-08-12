@@ -57,10 +57,8 @@ export default function RootLayout({
         <AppSidebar />
 
     
-        <SidebarInset>
 
           {children}
-        </SidebarInset>
       </SidebarProvider>
         )}
         
