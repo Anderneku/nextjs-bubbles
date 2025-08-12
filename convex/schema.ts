@@ -19,10 +19,8 @@ export default defineSchema({
     isPublic: v.boolean(),        // for discoverability
     joinCode: v.optional(v.string()), // invite-only code
     requireApproval: v.boolean(),     // if true, code is not enough
-    createdAt: v.number(),
-    iconUrl: v.optional(v.string()), // URL to bubble icon
     iconId: v.string(), // ID of the icon file in storage
-  }),
+  }).index("slug", ["slug"]),
 
   // Bubble Members
   bubble_members: defineTable({

@@ -32,6 +32,9 @@ import {
 } from "../ui/select";
 import { availabilityOptions, bubbleCategories } from "./bubbleCategories";
 import { Plus } from "lucide-react";
+import { useUser } from "@clerk/nextjs";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
 
 const formSchema = z.object({
   name: z
@@ -64,6 +67,8 @@ const formSchema = z.object({
 });
 
 export function CreateBubbleForm() {
+  const { user } = useUser();
+  const createBubble = useMutation(api.bubbles.createBubble);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -109,14 +114,17 @@ export function CreateBubbleForm() {
         }
       );
       const result = await uploadResponse.json();
-      //   if (uploadResponse.ok) {
-      //     return {
-      //       url: result.secure_url,
-      //       publicId: result.public_id,
-      //     };
-      //   } else {
-      //     throw new Error(result.error?.message || "Upload failed");
-      //   }
+
+      //   Create Bubble in Convex dB
+      if (user) {
+        createBubble({
+          name: values.name,
+          description: values.description,
+          isPublic: values.availability == "public" ? true : false,
+          publicId: result.public_id,
+          userId: user?.id,
+        });
+      }
     } catch (error) {
       console.error("Upload error:", error);
       throw error;
