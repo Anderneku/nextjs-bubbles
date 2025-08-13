@@ -1,7 +1,6 @@
-
 import "./globals.css";
-import  ConvexClientProvider  from "../lib/ConvexClientProvider";
-import { ClerkProvider } from '@clerk/nextjs'
+import NextTopLoader from 'nextjs-toploader'
+
 
 export default function RootLayout({
   children,
@@ -9,16 +8,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+
     <html lang="en">
-      <ConvexClientProvider>
-        <body
-          suppressHydrationWarning={true}
-        >
+        <body suppressHydrationWarning={true}>
+          <NextTopLoader />
           {children}
-        </body>
-      </ConvexClientProvider>
+          </body>
     </html>
-      </ClerkProvider>
   );
 }

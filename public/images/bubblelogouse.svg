@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="16"
+   height="16"
+   viewBox="0 0 16 16"
+   id="SVGRoot"
+   version="1.1"
+   enable-background="new"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   sodipodi:docname="bubblelogo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs4787">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="patternClipPath">
+      <rect
+         y="0"
+         x="0"
+         height="100"
+         width="100"
+         id="clipPathRect"
+         style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#ffff00;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:20;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1.0989;stroke-opacity:1;marker:none;enable-background:accumulate" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="4"
+     inkscape:cx="87.375"
+     inkscape:cy="70.125"
+     inkscape:document-units="px"
+     inkscape:current-layer="designTop"
+     showgrid="false"
+     inkscape:pagecheckerboard="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="974"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:blackoutopacity="0.0"
+     showborder="true"
+     inkscape:showpageshadow="true"
+     borderlayer="false"
+     inkscape:deskcolor="#d1d1d1"
+     showguides="false">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="16"
+       height="16"
+       id="page2"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <g
+     inkscape:groupmode="layer"
+     id="patternLayer"
+     inkscape:label="Pattern"
+     style="display:inline"
+     transform="translate(-16.552448,-16.552448)">
+    <g
+       inkscape:label="Helper Layer (don't use)"
+       clip-path="url(#patternClipPath)"
+       id="fullPattern"
+       style="display:inline">
+      <g
+         inkscape:groupmode="layer"
+         id="designTop"
+         inkscape:label="Pattern Foreground"
+         style="display:inline">
+        <g
+           id="g14"
+           inkscape:export-filename="bubblelogouse.svg"
+           inkscape:export-xdpi="96"
+           inkscape:export-ydpi="96"
+           style="fill:none;fill-opacity:1;stroke:#150e1b;stroke-opacity:1"
+           transform="matrix(0.23918044,0,0,0.23918044,12.593426,12.593426)">
+          <circle
+             style="fill:none;fill-opacity:1;stroke:#150e1b;stroke-width:4;stroke-opacity:1"
+             id="path11"
+             cx="50"
+             cy="50"
+             r="31.447552" />
+          <circle
+             style="fill:none;fill-opacity:1;stroke:#150e1b;stroke-width:2.4682;stroke-opacity:1"
+             id="path12"
+             cx="63"
+             cy="32.88348"
+             r="6.4013195" />
+          <circle
+             style="fill:none;fill-opacity:1;stroke:#150e1b;stroke-width:1.60046;stroke-opacity:1"
+             id="circle13"
+             cx="71.802643"
+             cy="45.836948"
+             r="4.1508307" />
+          <path
+             style="fill:none;fill-opacity:1;stroke:#150e1b;stroke-width:2;stroke-dasharray:none;stroke-opacity:1"
+             d="m 27.875,56 c 5.291667,13.708333 15.25,19.416667 29.875,17.125"
+             id="path14"
+             sodipodi:nodetypes="cc" />
+        </g>
+      </g>
+    </g>
+  </g>
+  <inkscape:_templateinfo
+     id="_templateinfo10">
+    <inkscape:_name
+       id="_name12">Seamless Pattern</inkscape:_name>
+    <inkscape:_shortdesc
+       id="_shortdesc14">Seamless Pattern</inkscape:_shortdesc>
+    <inkscape:_keywords
+       id="_keywords16">Seamless Pattern</inkscape:_keywords>
+  </inkscape:_templateinfo>
+</svg>

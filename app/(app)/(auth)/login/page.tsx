@@ -1,6 +1,6 @@
 "use client";
 
-import { Authenticated, Unauthenticated } from "convex/react";
+import { Authenticated, Unauthenticated, useMutation } from "convex/react";
 import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
@@ -15,18 +15,29 @@ import {
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 import InitUserSync from "@/lib/InitUserSync";
+import { useEffect } from "react";
 
 export default function Login() {
   const { user, isLoaded, isSignedIn } = useUser();
   const router = useRouter();
+  const createUser = useMutation(api.users.createUserIfNotExists);
+
   const goHome = async () => {
+    if (user) {
+      createUser({
+        clerkId: user.id,
+        name: `${user.firstName ?? ""} ${user.lastName ?? ""}`.trim(),
+        email: user.primaryEmailAddress?.emailAddress ?? "",
+        avatarUrl: user.imageUrl,
+      });
+    }
     router.push("/home");
   };
+
   return (
     <div className="flex items-center justify-center h-screen">
-    <InitUserSync/>
       <Authenticated>
         <Card className="transition-all scale-110 hover:scale-125 w-lg ">
           <CardHeader>
@@ -45,10 +56,11 @@ export default function Login() {
           <CardContent className="w-full flex justify-center font-semibold text-3xl"></CardContent>
           <CardFooter className="w-full flex justify-center gap-4">
             <Button
-              onClick={goHome}
+              onClick={() => goHome()}
+              disabled={!isLoaded}
               className="transition-all shadow-2xl hover:scale-125 active:scale-75"
             >
-              Pop Into Your Bubble <ArrowRight />
+              Pop Into Your Bubbles <ArrowRight />
             </Button>
           </CardFooter>
         </Card>
@@ -66,12 +78,19 @@ export default function Login() {
           </CardHeader>
           <CardContent className="w-full flex justify-center font-semibold text-3xl"></CardContent>
           <CardFooter className="w-full flex justify-center gap-4">
-            <SignInButton >
-            <Button variant={"secondary"} className="transition-all hover:scale-125 active:scale-90">Login</Button>
-            </SignInButton>
-            <SignUpButton>
-              <Button  className="transition-all hover:scale-125 active:scale-90">Sign Up</Button>
-            </SignUpButton>
+            <Button
+              asChild
+              variant={"secondary"}
+              className="transition-all hover:scale-125 active:scale-90"
+            >
+              <SignInButton>Login</SignInButton>
+            </Button>
+            <Button
+              asChild
+              className="transition-all hover:scale-125 active:scale-90"
+            >
+              <SignUpButton>Sign Up</SignUpButton>
+            </Button>
           </CardFooter>
         </Card>
       </Unauthenticated>

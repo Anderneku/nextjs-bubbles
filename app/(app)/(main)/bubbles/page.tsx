@@ -12,7 +12,7 @@ import { api } from "@/convex/_generated/api";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
 import { ArrowRight } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 
 export default function YourBubbles() {
   const router = useRouter();
@@ -43,7 +43,7 @@ export default function YourBubbles() {
                   <h1 className="font-bold text-2xl break-all">
                     {userBubble.bubble?.name}
                   </h1>
-                  <Badge>
+                  <Badge variant={"secondary"}>
                     {userBubble.role[0].toUpperCase() +
                       userBubble.role.slice(1)}
                   </Badge>

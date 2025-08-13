@@ -34,7 +34,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "./ui/separator";
-import { useRouter } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 
 // This is sample data
 const data = {
@@ -46,7 +46,7 @@ const data = {
   navMain: [
     {
       title: "Home",
-      url: "#",
+      url: "/home",
       icon: Home,
       isActive: true,
     },
@@ -70,14 +70,13 @@ const data = {
     },
   ],
   navSecondary: [
-    
     {
       title: "New Bubble",
       url: "/create-bubble",
       icon: Plus,
       isActive: false,
     },
-  ]
+  ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -87,7 +86,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const [activeItem, setActiveItem] = React.useState(data.navMain[0]);
   const { setOpen } = useSidebar();
 
-  function goToPage(link :string){
+  function goToPage(link: string) {
     router.push(link);
   }
 
@@ -102,17 +101,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         className="w-[calc(var(--sidebar-width-icon)+1px)]! border-r "
       >
         <SidebarHeader className="w-full flex items-center justify-center">
-          {/*   TODO: Add Logo */}
-          <File/>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton size="lg" asChild className="md:h-8 md:p-0">
+              <SidebarMenuButton tooltip={{children: "Bubbles", hidden:false}} size="lg" asChild className="md:h-8 md:p-0">
                 <a href="#">
                   <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                    <Command className="size-4" />
+                              <img src={"/images/bubblelogo1.png"} width={25} height={25} />
+
                   </div>
                   <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-medium">Acme Inc</span>
+                    <span className="truncate font-medium">Bubbles</span>
                     <span className="truncate text-xs">Enterprise</span>
                   </div>
                 </a>
@@ -134,7 +132,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                       onClick={() => {
                         setActiveItem(item);
                         setOpen(true);
-                        goToPage(item.url)
+                        goToPage(item.url);
                       }}
                       isActive={activeItem?.title === item.title}
                       className="px-2.5 md:px-2"

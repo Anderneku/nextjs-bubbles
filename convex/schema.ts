@@ -13,12 +13,12 @@ export default defineSchema({
   // Bubbles
   bubbles: defineTable({
     name: v.string(),
-    slug: v.string(),             // unique name in URL
+    slug: v.string(), // unique name in URL
     description: v.optional(v.string()),
-    createdBy: v.string(),        // userId
-    isPublic: v.boolean(),        // for discoverability
+    createdBy: v.string(), // userId
+    isPublic: v.boolean(), // for discoverability
     joinCode: v.optional(v.string()), // invite-only code
-    requireApproval: v.boolean(),     // if true, code is not enough
+    requireApproval: v.boolean(), // if true, code is not enough
     iconUrl: v.string(),
   }).index("slug", ["slug"]),
 
@@ -26,7 +26,11 @@ export default defineSchema({
   bubble_members: defineTable({
     user_id: v.string(),
     bubbleId: v.string(),
-    role: v.union(v.literal("admin"), v.literal("moderator"), v.literal("member")),
+    role: v.union(
+      v.literal("admin"),
+      v.literal("moderator"),
+      v.literal("member")
+    ),
   }).index("by_userId_role", ["user_id", "role"]),
 
   // Posts
@@ -34,6 +38,7 @@ export default defineSchema({
     authorId: v.string(),
     bubbleId: v.string(),
     body: v.string(),
+    imageUrl: v.string(),
   }).index("by_bubbleId", ["bubbleId"]),
 
   // Comments
@@ -49,7 +54,11 @@ export default defineSchema({
     bubbleId: v.string(),
     userId: v.string(),
     reason: v.optional(v.string()),
-    status: v.union(v.literal("pending"), v.literal("approved"), v.literal("rejected")),
+    status: v.union(
+      v.literal("pending"),
+      v.literal("approved"),
+      v.literal("rejected")
+    ),
     createdAt: v.number(),
   }),
 });

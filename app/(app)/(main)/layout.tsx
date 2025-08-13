@@ -40,7 +40,7 @@ export default function RootLayout({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   return (
-    <div>
+    <div >
       {!isMobile && (
         <>
           <SidebarProvider
@@ -58,8 +58,8 @@ export default function RootLayout({
 
       {isMobile && (
         <div className="w-screen h-screen">
-          {children}
-          <nav className="fixed bottom-0 left-0 w-full bg-background flex justify-around p-2">
+          <div className="pb-20">{children}</div>
+          <nav className="fixed bottom-0 left-0 w-full bg-background border-t flex justify-around p-2">
             {navItems.map((item) => (
               <a
                 key={item.label}
