@@ -14,6 +14,7 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as bubbles from "../bubbles.js";
+import type * as posts from "../posts.js";
 import type * as users from "../users.js";
 
 /**
@@ -26,6 +27,7 @@ import type * as users from "../users.js";
  */
 declare const fullApi: ApiFromModules<{
   bubbles: typeof bubbles;
+  posts: typeof posts;
   users: typeof users;
 }>;
 export declare const api: FilterApi<

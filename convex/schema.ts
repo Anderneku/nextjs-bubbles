@@ -34,7 +34,7 @@ export default defineSchema({
     authorId: v.string(),
     bubbleId: v.string(),
     body: v.string(),
-  }),
+  }).index("by_bubbleId", ["bubbleId"]),
 
   // Comments
   comments: defineTable({
