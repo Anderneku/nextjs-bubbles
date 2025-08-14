@@ -78,3 +78,12 @@ export const getBubbleName = query({
     return await ctx.db.query("bubbles").withIndex("slug", q => q.eq("slug", args.bubbleSlug)).unique();
   }
 })
+
+export const getBubbleRoles = query({
+  args: {
+    userId: v.string()
+  },
+  handler: async (ctx, args) => {
+    return await ctx.db.query("bubble_members").withIndex("by_userId", q=>q.eq("user_id", args.userId)).unique();
+  }
+})

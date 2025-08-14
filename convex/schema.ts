@@ -31,7 +31,7 @@ export default defineSchema({
       v.literal("moderator"),
       v.literal("member")
     ),
-  }).index("by_userId_role", ["user_id", "role"]),
+  }).index("by_userId_role", ["user_id", "role"]).index("by_userId", ["user_id"]),
 
   // Posts
   posts: defineTable({
@@ -62,4 +62,10 @@ export default defineSchema({
     ),
     createdAt: v.number(),
   }),
+
+  // Likes
+  likes: defineTable({
+    userId: v.string(),
+    postId: v.string(),
+  }).index("by_postId_userId", ["postId", "userId"]).index("by_postId", ["postId"])
 });

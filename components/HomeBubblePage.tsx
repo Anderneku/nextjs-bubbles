@@ -32,7 +32,7 @@ type Posts = {
     email: string;
   } | null;
 };
-export default function BubblePost({
+export default function HomeBubblePost({
   post,
   formattedTime,
 }: {
@@ -50,6 +50,7 @@ export default function BubblePost({
   const getBubbleRoles = useQuery(api.bubbles.getBubbleRoles, {
     userId: post.author?.clerkId as string,
   });
+  
   const youLikedIt = useQuery(api.likes.youLikedIt, {
     postId: post.post._id,
     userId: user?.id as string,
