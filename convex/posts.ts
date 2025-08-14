@@ -49,3 +49,4 @@ export const getPosts = query({
     };
   },
 });
+

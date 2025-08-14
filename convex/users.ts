@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { mutation } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 
 export const createUserIfNotExists = mutation({
   args: {
@@ -24,3 +24,12 @@ export const createUserIfNotExists = mutation({
     });
   },
 });
+
+export const getUsersProfilePic = query({
+  args: {
+    userClerkId: v.string()
+  },
+  handler: async (ctx, args) => {
+    return await ctx.db.query("users").withIndex("by_clerkId", q => q.eq("clerkId", args.userClerkId)).first()
+  }
+})

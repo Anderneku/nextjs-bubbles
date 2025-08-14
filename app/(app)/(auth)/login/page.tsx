@@ -16,7 +16,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "nextjs-toploader/app";
-import InitUserSync from "@/lib/InitUserSync";
 import { useEffect } from "react";
 
 export default function Login() {

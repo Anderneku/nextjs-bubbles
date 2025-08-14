@@ -7,7 +7,10 @@ import { useUser } from "@clerk/nextjs";
 import { usePaginatedQuery, useQuery } from "convex/react";
 import { use, useEffect, useRef, useState } from "react";
 import { CreatePostDialog } from "@/components/dialogs/createPostDialog";
-import { Plus } from "lucide-react";
+import { ChevronsUpDown, Heart, MessageSquareIcon, Plus } from "lucide-react";
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@radix-ui/react-collapsible";
+import { Input } from "@/components/ui/input";
+import BubblePost from "@/components/BubblePage";
 
 export default function BubblePage({
   params,
@@ -62,46 +65,13 @@ export default function BubblePage({
   }
   return (
     <>
-      <div className="sticky bg-accent text-accent-foreground border-b-2 z-50 p-4 top-0 flex w-full justify-center items-center gap-2 ">
-        <img src={currentBubble?.iconUrl} width={30} height={30} />
-        <h1 className="font-bold">{currentBubble?.name}</h1>
+      <div className="sticky bg-sidebar text-secondary border-b-2 z-50 p-4 top-0 flex w-full justify-center items-center gap-2 ">
+        <img src={currentBubble?.iconUrl} width={40} height={40} />
+        <h1 className="font-bold text-2xl">{currentBubble?.name}</h1>
       </div>
       <div className="w-full   h-full  flex flex-col items-center gap-4 p-4">
         {posts.map((post, index) => (
-          <div
-            key={index}
-            style={{ borderRadius: "var(--radius-xl)" }}
-            className="bg-card  border-border border-2 text-foreground  w-full md:w-2xl  shadow-sm p-8 "
-          >
-            <div className="flex items-center gap-2">
-              <div className="mb-auto">
-                <img
-                  src={post.author?.avatarUrl}
-                  width={50}
-                  height={50}
-                  className="rounded-full"
-                />
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <p className="font-bold">{post.author?.name}</p>
-                  <Badge className="text-sm">
-                    {formattedTime(post.post._creationTime)}
-                  </Badge>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col items-center">
-              <p className="mt-1 whitespace-pre-wrap p-2">{post.post.body}</p>
-              <div className="w-full h-fit flex justify-center  ">
-                <img
-                  src={post.post.imageUrl}
-                  alt="Post"
-                  className="transition-all   hover:brightness-50 z-0  h-fit w-fit max-h-[500px] max-w-full items-center rounded-lg  object-cover"
-                />
-              </div>
-            </div>
-          </div>
+          <BubblePost formattedTime={formattedTime} post={post} key={index}  />
         ))}
         <div ref={loadMoreRef} />
       </div>

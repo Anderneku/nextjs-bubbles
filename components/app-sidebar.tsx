@@ -35,6 +35,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "./ui/separator";
 import { useRouter } from "nextjs-toploader/app";
+import { UserButton, useUser } from "@clerk/nextjs";
 
 // This is sample data
 const data = {
@@ -97,6 +98,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <>
       <Sidebar
+      
         collapsible="icon"
         className="w-[calc(var(--sidebar-width-icon)+1px)]! border-r "
       >
@@ -172,8 +174,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarGroupContent>
           </SidebarGroup>
         </SidebarContent>
-        <SidebarFooter>
-          <NavUser user={data.user} />
+        <SidebarFooter className="w-full flex justify-center items-center">
+          <UserButton/>
         </SidebarFooter>
       </Sidebar>
     </>

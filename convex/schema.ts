@@ -44,10 +44,11 @@ export default defineSchema({
   // Comments
   comments: defineTable({
     authorId: v.string(),
+    authorProfileUrl: v.string(),
+    authorName: v.string(),
     postId: v.string(),
     body: v.string(),
-    createdAt: v.number(),
-  }),
+  }).index("by_postId", ["postId"]),
 
   // Join Requests
   join_requests: defineTable({
