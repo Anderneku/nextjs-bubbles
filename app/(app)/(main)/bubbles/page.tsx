@@ -21,14 +21,14 @@ export default function YourBubbles() {
     userId: user?.id as string,
   });
   return (
-    <div className="w-fit flex flex-col gap-4">
+    <div className="w-full flex flex-col items-center gap-4">
       {userBubbles?.map((userBubble, index) => (
         <Card
           key={index}
-          className="w-2xl transition-all hover:scale-110 cursor-default"
+          className="w-full  md:w-2xl transition-all hover:scale-110 cursor-default"
         >
           <CardContent className="w-full ">
-            <div className="flex gap-4 w-full ">
+            <div className="flex gap-4 w-full items-center">
               {/* Bubble Icon */}
               <div>
                 <img
@@ -49,7 +49,7 @@ export default function YourBubbles() {
                   </Badge>
                 </div>
                 <div className="w-full h-full">
-                  <p className="text-bas  break-all truncate">
+                  <p className="text-base  break-all truncate">
                     {userBubble.bubble?.description}
                   </p>
                 </div>

@@ -5,7 +5,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
       <ConvexClientProvider>
-        <div className="h-full" >{children}</div>
+        <div className="h-full w-full " >{children}</div>
       </ConvexClientProvider>
     </ClerkProvider>
   );

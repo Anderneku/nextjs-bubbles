@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+
 
 export default function YourBubblesLayout({
   children,
@@ -14,7 +14,8 @@ export default function YourBubblesLayout({
         backgroundSize: "auto",
       }}
     >
-      {children}
+          {children}
+
     </main>
   );
 }

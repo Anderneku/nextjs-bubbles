@@ -20,7 +20,7 @@ export default defineSchema({
     joinCode: v.optional(v.string()), // invite-only code
     requireApproval: v.boolean(), // if true, code is not enough
     iconUrl: v.string(),
-  }).index("slug", ["slug"]),
+  }).index("slug", ["slug"]).index("by_publicity", ["isPublic"]),
 
   // Bubble Members
   bubble_members: defineTable({
@@ -31,7 +31,7 @@ export default defineSchema({
       v.literal("moderator"),
       v.literal("member")
     ),
-  }).index("by_userId_role", ["user_id", "role"]).index("by_userId", ["user_id"]),
+  }).index("by_userId_role", ["user_id", "role"]).index("by_userId", ["user_id"]).index("by_userId_bubbleId", ["user_id", "bubbleId"]).index("by_bubbleId", ["bubbleId"]),
 
   // Posts
   posts: defineTable({

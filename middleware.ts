@@ -13,13 +13,11 @@ export default clerkMiddleware(async (auth, req) => {
 
   // Always allow public routes - NO AUTH CHECK
   if (isPublicRoute(req)) {
-    console.log("public");
     return NextResponse.next();
   }
 
   // Only protect /app routes
   if (isProtectedRoute(req)) {
-    console.log("privaate");
     const { userId } = await auth();
 
     if (!userId) {

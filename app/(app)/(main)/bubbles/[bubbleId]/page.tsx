@@ -1,16 +1,20 @@
 "use client";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 import { api } from "@/convex/_generated/api";
-import { useUser } from "@clerk/nextjs";
 import { usePaginatedQuery, useQuery } from "convex/react";
 import { use, useEffect, useRef, useState } from "react";
 import { CreatePostDialog } from "@/components/dialogs/createPostDialog";
-import { ChevronsUpDown, Heart, MessageSquareIcon, Plus } from "lucide-react";
-import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@radix-ui/react-collapsible";
+import { Plus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import BubblePost from "@/components/BubblePage";
+import { Label } from "@/components/ui/label";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover";
+import { Badge } from "@/components/ui/badge";
 
 export default function BubblePage({
   params,
@@ -30,6 +34,9 @@ export default function BubblePage({
     { bubbleId: currentBubble?._id as string },
     { initialNumItems: 10 }
   );
+  const getUsersInBubble = useQuery(api.bubbles.getAllBubbleMembers, {
+    bubbleId:  currentBubble?._id as string,
+  })
   // const getPosts = useQuery(api.posts.getPosts, {
   //   bubbleId: currentBubble?._id as string,
   // });
@@ -65,13 +72,35 @@ export default function BubblePage({
   }
   return (
     <>
-      <div className="sticky bg-sidebar text-secondary border-b-2 z-50 p-4 top-0 flex w-full justify-center items-center gap-2 ">
-        <img src={currentBubble?.iconUrl} width={40} height={40} />
-        <h1 className="font-bold text-2xl">{currentBubble?.name}</h1>
+      <div className="sticky bg-sidebar text-secondary border-b-2 z-50 p-4 top-0 flex w-full justify-center items-center ">
+        <div className="flex items-center gap-2">
+          <img src={currentBubble?.iconUrl} width={40} height={40} />
+          <h1 className="font-bold text-2xl">{currentBubble?.name}</h1>
+        </div>
+        <div className="absolute right-8">
+
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button variant="outline">Members List</Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-80 p-2">
+            <div className="flex flex-col w-full h-8">
+              {getUsersInBubble?.map((user, index) => (
+                <div key={index} className="flex w-full h-full gap-2 items-center">
+                  <img src={user?.avatarUrl} width={32} height={32} className="object-cover rounded-full"/>
+                  <p>{user?.name}</p>
+                  <p className="ml-auto">{index+1}</p>
+                </div>
+              ))}
+            </div>
+          </PopoverContent>
+        </Popover>
+        </div>
       </div>
+
       <div className="w-full   h-full  flex flex-col items-center gap-4 p-4">
         {posts.map((post, index) => (
-          <BubblePost formattedTime={formattedTime} post={post} key={index}  />
+          <BubblePost formattedTime={formattedTime} post={post} key={index} />
         ))}
         <div ref={loadMoreRef} />
       </div>

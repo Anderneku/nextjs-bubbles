@@ -82,7 +82,9 @@ const data = {
   ],
 };
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function MembersSidebar({
+  ...props
+}: React.ComponentProps<typeof Sidebar>) {
   // Note: I'm using state to show active item.
   // IRL you should use the url/router.
   const router = useRouter();
@@ -104,8 +106,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <>
       <Sidebar
+        side="right"
         collapsible="icon"
-        className="w-[calc(var(--sidebar-width-icon)+1px)]! border-r z-50"
+        className="w-[calc(var(--sidebar-width-icon)+1px)]! border-r z-[100]"
       >
         <SidebarHeader className="w-full flex items-center justify-center">
           <SidebarMenu>
@@ -129,7 +132,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarHeader>
-        <Separator/>
+        <Separator />
         <SidebarContent>
           <SidebarGroup>
             <SidebarGroupContent className="px-1.5 md:px-0">
@@ -157,27 +160,30 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
-          <Separator/>
+          <Separator />
           <SidebarGroup>
             <SidebarGroupContent className="px-1.5 md:px-0">
               <SidebarMenu className="flex flex-col gap-4">
                 {getBubbles?.map((bubble, index) => (
                   <a key={index} href={`bubbles/${bubble.bubble?.slug}`}>
-
-                  <SidebarMenuItem >
-                    <SidebarMenuButton  tooltip={{ children: <span>{bubble.bubble?.name}</span>, hidden: false, }} className="w-full h-full">
-                      <img
-                        src={bubble.bubble?.iconUrl}
-                      />
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton
+                        tooltip={{
+                          children: <span>{bubble.bubble?.name}</span>,
+                          hidden: false,
+                        }}
+                        className="w-full h-full"
+                      >
+                        <img src={bubble.bubble?.iconUrl} />
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
                   </a>
                 ))}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
         </SidebarContent>
-        <Separator/>
+        <Separator />
         <SidebarFooter className="w-full flex justify-center items-center">
           <SidebarMenu className="flex flex-col gap-4">
             {data.navSecondary.map((item) => (

@@ -40,10 +40,10 @@ export default function RootLayout({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   return (
-    <div >
+    <div className="w-full h-full">
       {!isMobile && (
         <>
-          <SidebarProvider
+          <SidebarProvider 
             style={
               {
                 "--sidebar-width": "fit",
@@ -51,14 +51,16 @@ export default function RootLayout({
             }
           >
             <AppSidebar />
-            <SidebarInset>{children}</SidebarInset>
+            <SidebarInset>
+              {children}
+              </SidebarInset>
           </SidebarProvider>
         </>
       )}
 
       {isMobile && (
-        <div className="w-screen h-screen">
-          <div className="pb-20">{children}</div>
+        <div className="w-full h-full">
+          <div className="pb-20 w-full h-full">{children}</div>
           <nav className="fixed bottom-0 left-0 w-full bg-background border-t flex justify-around p-2">
             {navItems.map((item) => (
               <a

@@ -35,8 +35,10 @@ type Posts = {
 export default function HomeBubblePost({
   post,
   formattedTime,
+  bubbleId,
 }: {
   post: Posts;
+  bubbleId: string;
   formattedTime: (timestamp: number) => string;
 }) {
   const { user } = useUser();
@@ -44,13 +46,15 @@ export default function HomeBubblePost({
   const getComments = useQuery(api.comments.getComments, {
     postId: post.post._id,
   });
+  const getBubbleName = useQuery(api.bubbles.getBubbleNameById, { bubbleId });
+
   const getLikesCount = useQuery(api.likes.getLikesCount, {
     postId: post.post._id,
   });
   const getBubbleRoles = useQuery(api.bubbles.getBubbleRoles, {
     userId: post.author?.clerkId as string,
   });
-  
+
   const youLikedIt = useQuery(api.likes.youLikedIt, {
     postId: post.post._id,
     userId: user?.id as string,
@@ -106,14 +110,12 @@ export default function HomeBubblePost({
     const Todayday = today.getDate();
     const Todaymonth = today.toLocaleString("default", { month: "short" });
 
-    if (day == Todayday ){
-        return "Today"
-    } else if (day == (Todayday - 1)){
-        return "Yesterday"
-    }
-    else{
-        return `${day} ${month}`;
-
+    if (day == Todayday) {
+      return "Today";
+    } else if (day == Todayday - 1) {
+      return "Yesterday";
+    } else {
+      return `${day} ${month}`;
     }
   }
   return (
@@ -121,8 +123,8 @@ export default function HomeBubblePost({
       style={{ borderRadius: "var(--radius-xl)" }}
       className="bg-card  border-border border-2 text-foreground  w-full md:w-2xl  shadow-sm p-8 "
     >
-      <div className="flex items-center gap-2">
-        <div className="mb-auto">
+      <div className="flex w-full h-full items-center gap-2">
+        <div className="h-full w-full md:w-fit">
           <img
             src={post.author?.avatarUrl}
             width={50}
@@ -130,14 +132,17 @@ export default function HomeBubblePost({
             className="rounded-full"
           />
         </div>
-        <div>
-          <div className="flex items-center gap-2">
+        <div className="w-full">
+          <div className="flex items-center gap-2 w-full">
             <p className="font-bold">{post.author?.name}</p>
             <Badge className="text-sm">
               {formattedTime(post.post._creationTime)}
             </Badge>
             <Badge className="text-sm">
               {formatDate(post.post._creationTime)}
+            </Badge>
+            <Badge variant={"secondary"} className="text-sm">
+              {getBubbleName?.name}
             </Badge>
           </div>
         </div>

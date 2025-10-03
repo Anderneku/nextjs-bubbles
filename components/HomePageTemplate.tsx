@@ -1,6 +1,6 @@
-'use client';
+"use client";
 import { api } from "@/convex/_generated/api";
-import { usePaginatedQuery } from "convex/react";
+import { usePaginatedQuery, useQuery } from "convex/react";
 import { useEffect, useRef } from "react";
 import HomeBubblePost from "./HomeBubblePage";
 
@@ -41,10 +41,42 @@ export default function HomePageTemplate({ bubbleId }: { bubbleId: string }) {
     });
     return formattedTime;
   }
+
+  function formatDate(timestamp: number) {
+    const today = new Date();
+    const date = new Date(timestamp);
+
+    // Format as '12 Aug'
+    const day = date.getDate();
+    const Todayday = today.getDate();
+
+    if (day == Todayday || day == Todayday-1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   return (
     <>
       {posts.map((post, index) => (
-        <HomeBubblePost formattedTime={formattedTime} post={post} key={index} />
+        <div key={index} className="m-0">
+        {formatDate(post.post._creationTime) == true && (
+
+          <HomeBubblePost
+            formattedTime={formattedTime}
+            post={post}
+            bubbleId={bubbleId}
+          />
+        )}
+        {formatDate(post.post._creationTime) == false && (
+
+          <HomeBubblePost
+            formattedTime={formattedTime}
+            post={post}
+            bubbleId={bubbleId}
+          />
+        )}
+        </div>
       ))}
       <div ref={loadMoreRef} />
     </>
